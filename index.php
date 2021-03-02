@@ -38,6 +38,24 @@ $listProduct = array(
     ),
 
 );
+$listCategory = [
+    [
+        'id' => 1,
+        'name' => "Computer",
+    ],
+    [
+        'id' => 2,
+        'name' => "Memory",
+    ],
+    [
+        'id' => 3,
+        'name' => "Cart",
+    ],
+    [
+        'id' => 4,
+        'name' => "Acsesỏy",
+    ],
+];
 
 function findProduct($listProduct, $nameProduct)
 {
@@ -92,10 +110,25 @@ function sortByPrice($listProduct)
 
 }
 
+function sortByName($listProduct)
+{
+    for ($i = 0; $i < count($listProduct); $i++) {
+        $loop = $i;
+        $current = $listProduct[$i];
+        while ($loop > 0 && (strlen($listProduct[$loop - 1]['name']) < strlen($current['name']))) {
+            $listProduct[$loop] = $listProduct[$loop - 1];
+            $loop -= 1;
+        }
+        $listProduct[$loop] = $current;
+    }
+    return $listProduct;
+}
+
 // $item = findProduct($listProduct, 'RAM');
 // $item = findProductByCategory($listProduct, 1);
 // $item = findProductByPrice($listProduct, 3000);
-$item = sortByPrice($listProduct);
+// $item = sortByPrice($listProduct);
+$item = sortByName($listProduct);
 
 echo "<pre>";
 print_r($item);
