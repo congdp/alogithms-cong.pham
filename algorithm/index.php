@@ -8,7 +8,7 @@ $listProduct = array(
     ),
     1 => array(
         'name' => 'RAM',
-        'price' => 50,
+        'price' => 5,
         'quality' => 2,
         'categoryId' => 2,
     ),
@@ -153,8 +153,8 @@ function sortByName($listProduct)
 
 function minByPrice($listProduct)
 {
+    $currentMinPrice = 0;
     for ($i = 0; $i < count($listProduct); $i++) {
-        $currentMinPrice = 0;
         if ($listProduct[$i]['price'] < $listProduct[$currentMinPrice]['price']) {
             $currentMinPrice = $i;
         }
@@ -164,8 +164,8 @@ function minByPrice($listProduct)
 
 function maxByPrice($listProduct)
 {
+    $currentMaxPrice = 0;
     for ($i = 0; $i < count($listProduct); $i++) {
-        $currentMaxPrice = 0;
         if ($listProduct[$i]['price'] > $listProduct[$currentMaxPrice]['price']) {
             $currentMaxPrice = $i;
         }
@@ -257,10 +257,10 @@ function printMenu($menu, $parentId, $level = 0)
 // $item = sortByPrice($listProduct);
 // $item = sortByName($listProduct);
 // $item = minByPrice($listProduct);
-// $item = maxByPrice($listProduct);
-$listCategory = printMenu($menu, 0);
-foreach ($listCategory as $item) {
-    echo str_repeat('--', $item['level']) . $item['title'] . "<br>";
-}
-// echo "<pre>";
-// print_r($item);
+$item = maxByPrice($listProduct);
+// $listCategory = printMenu($menu, 0);
+// foreach ($listCategory as $item) {
+//     echo str_repeat('--', $item['level']) . $item['title'] . "<br>";
+// }
+echo "<pre>";
+print_r($item);
