@@ -11,7 +11,7 @@ class ProductDemo
     }
     public function printProduct()
     {
-        return "Id:" . $this->productDemo->get_id() . '<br>' . 'Name:' . $this->productDemo->get_name() . '<br>' . 'CategoryId:' . $this->productDemo->get_categoryId() . "";
+        return "Id:" . $this->productDemo->getId() . '<br>' . 'Name:' . $this->productDemo->getName() . '<br>' . 'CategoryId:' . $this->productDemo->getCategoryId() . "";
     }
 }
 

@@ -221,13 +221,33 @@ function calSalaryByRecusive($salary, $numYear)
     }
 }
 
-function calMonth($rate)
+function calMonth($money, $rate)
 {
-    $recipeRate = 1 + ($rate / 100);
-    $permanentRate = $recipeRate;
+    // $recipeRate = 1 + ($rate / 100);
+    // $permanentRate = $recipeRate;
+    $monthInterest = $money;
     $month = 0;
-    while ($recipeRate < 2) {
-        $recipeRate *= $permanentRate;
+    while ($monthInterest < 2 * $money) {
+        $monthInterest += $monthInterest * ($rate / 100);
+        $month++;
+    }
+    return $month;
+}
+
+// function colMonth($money, $rate)
+function calMoney($money, $rate, $month)
+{
+    if ($month == 0) {
+        return $money;
+    }
+    return calMoney($money, $rate, $month - 1) + calMoney($money, $rate, $month - 1) * ($rate / 100);
+
+}
+
+function calMonthByRecursive($money, $rate)
+{
+    $month = 0;
+    while (calMoney($money, $rate, $month) < $money * 2) {
         $month++;
     }
     return $month;
@@ -247,7 +267,9 @@ function printMenu($menu, $parentId, $level = 0)
     }
     return $result;
 }
-// echo calMonth(2);
+echo calMonth(1000, 6);
+echo calMonthByRecursive(1000, 6);
+
 // $item = mapProductByCategory($listProduct, $listCategory);
 // $item = sortByCategoryName($listProduct, $listCategory);
 // $item = getCategoryNameById($listCategory, 2);

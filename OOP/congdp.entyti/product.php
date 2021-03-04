@@ -12,27 +12,27 @@ class Product
         $this->categoryId = $categoryId;
     }
 
-    public function set_id($id)
+    public function setId($id)
     {
         $this->id = $id;
     }
-    public function get_id()
+    public function getId()
     {
         return $this->id;
     }
-    public function set_name($name)
+    public function setName($name)
     {
         $this->name = $name;
     }
-    public function get_name()
+    public function getName()
     {
         return $this->name;
     }
-    public function set_categoryId($categoryId)
+    public function setCategoryId($categoryId)
     {
         $this->categoryId = $categoryId;
     }
-    public function get_categoryId()
+    public function getCategoryId()
     {
         return $this->categoryId;
     }

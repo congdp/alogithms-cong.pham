@@ -1,5 +1,6 @@
 <?php
-// require '../congdp.entyti/product.php';
+require '../congdp.entyti/accessory.php';
+require '../congdp.entyti/category.php';
 require '../congdp.demo/productDemo.php';
 
 class Database
@@ -20,18 +21,6 @@ class Database
     {
         return $this->accessoryTable;
     }
-    public function setProductTable($productTable)
-    {
-        $this->productTable = $productTable;
-    }
-    public function setCategoryTable($categoryTable)
-    {
-        $this->categoryTable = $categoryTable;
-    }
-    public function setAccessoryTable($accessoryTable)
-    {
-        $this->accessoryTable = $accessoryTable;
-    }
 
     public function insertTable($tableName, $row)
     {
@@ -42,7 +31,7 @@ class Database
     {
         $table = array();
         foreach ($this->$tableName as $item) {
-            if ($item->get_name() == $elementName) {
+            if ($item->getName() == $elementName) {
                 $table[] = $item;
             }
         }
@@ -52,7 +41,7 @@ class Database
     public function findById($tableName, $id)
     {
         foreach ($this->$tableName as $item) {
-            if ($item->get_id() == $id) {
+            if ($item->getId() == $id) {
                 return $item;
             }
         }
@@ -62,8 +51,8 @@ class Database
     public function findByName($tableName, $name)
     {
         foreach ($this->$tableName as $item) {
-            if ($item->get_name() == $name) {
-                return ($item);
+            if ($item->getName() == $name) {
+                return $item;
             }
         }
         return false;
@@ -72,7 +61,7 @@ class Database
     public function updateTable($tableName, $row)
     {
         foreach ($this->$tableName as $key => $item) {
-            if ($item->get_id() == $row->get_id()) {
+            if ($item->getId() == $row->getId()) {
                 return ($this->$tableName[$key] = $row);
             }
         }
@@ -82,7 +71,7 @@ class Database
     public function deleteTable($tableName, $id)
     {
         foreach ($this->$tableName as $key => $item) {
-            if ($item->get_id() == $id) {
+            if ($item->getId() == $id) {
                 unset($this->$tableName[$key]);
                 return true;
             }
@@ -94,6 +83,26 @@ class Database
     {
         unset($this->$tableName);
         return true;
+    }
+
+    public function getAllTable($table)
+    {
+        $result = array();
+        foreach ($this->$table as $value) {
+            $result[] = $value;
+        }
+        return $result;
+    }
+
+    public function updateTableById($id, $row, $tableName)
+    {
+        foreach ($this->$tableName as $key => $item) {
+            if ($item->getId() == $id) {
+                return ($this->$tableName[$key] = $row);
+            }
+        }
+        return false;
+
     }
 }
 
