@@ -1,9 +1,5 @@
 <?php
-// require '../congdp.dao/database.php';
 require '../congdp.dao/database.php';
-require_once '../congdp.entyti/category.php';
-require_once '../congdp.entyti/accessory.php';
-
 class DatabaseDemo extends Database
 {
     protected $databaseDemo;
@@ -46,9 +42,9 @@ class DatabaseDemo extends Database
     {
         $numRow = 10;
         for ($i = 1; $i < $numRow; $i++) {
-            $this->insertTableTest('productTable', new Product($i, 'product test', $i));
-            $this->insertTableTest('categoryTable', new Category($i, 'category test', $i));
-            $this->insertTableTest('accessoryTable', new Accessory($i, 'accessory test', $i));
+            $this->insertTableTest('productTable', new Product($i, 'product test' . $i, $i));
+            $this->insertTableTest('categoryTable', new Category($i, 'category test' . $i, $i));
+            $this->insertTableTest('accessoryTable', new Accessory($i, 'accessory test' . $i, $i));
         }
     }
 
@@ -56,7 +52,6 @@ class DatabaseDemo extends Database
     {
         $result = $this->getAllTable($table);
         foreach ($result as $item) {
-
             echo "Id:" . $item->getId() . '<br>' . 'Name:' . $item->getName() . '<br>' . 'CategoryId:' . $item->getCategoryId() . '<br>' . "";
         }
     }
@@ -67,21 +62,23 @@ class DatabaseDemo extends Database
     }
 }
 
-$databaseDemo = new DatabaseDemo();
+// $databaseDemo = new DatabaseDemo();
+$databaseDemo = new DatabaseDemo(Database::createDatabase());
+
 $row = new Product(1, 'cong', 1);
 $row1 = new Product(2, 'conggggg', 2);
 $update = new Product(1, 'congpham', 1);
 
 echo "<pre>";
 
-// $databaseDemo->initDatabase();
-// $databaseDemo->printTable('productTable');
+$databaseDemo->initDatabase();
+$databaseDemo->printTable('productTable');
 
-print_r($databaseDemo->insertTableTest('product', $row));
-print_r($databaseDemo->insertTableTest('product', $row1));
+print_r($databaseDemo->insertTableTest('productTable', $row));
+// print_r($databaseDemo->insertTableTest('product', $row1));
 
 // echo "<pre>";
-// print_r($databaseDemo->selectTableTest('product', 'cong'));
+// print_r($databaseDemo->getAllTable('product', 'cong'));
 
 // print_r($databaseDemo->updateTableTest('product', $update));
 

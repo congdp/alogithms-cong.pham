@@ -30,10 +30,10 @@ class CategoryDaoDemo extends CategoryDAO
     }
 }
 
-// $categoryDaoDemo = new CategoryDaoDemo(new Database);
-// $row = new Category(1, 'cong');
+$categoryDaoDemo = new CategoryDaoDemo(new Database);
+$row = new Category(1, 'cong');
 
-// echo "<pre>";
-// print_r($categoryDaoDemo->insertTest($row));
+echo "<pre>";
+print_r($categoryDaoDemo->insertTest($row));
 // print_r($categoryDaoDemo->findAllTest($row));
 // print_r($categoryDaoDemo->findByIdTest(1));

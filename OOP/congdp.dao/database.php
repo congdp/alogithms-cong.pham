@@ -1,13 +1,25 @@
 <?php
-require '../congdp.entyti/accessory.php';
-require '../congdp.entyti/category.php';
-require '../congdp.demo/productDemo.php';
+require_once '../congdp.entyti/accessory.php';
+require_once '../congdp.entyti/category.php';
+require_once '../congdp.demo/productDemo.php';
+
+define('TABLE_NAMES', ['productTable', 'categoryTable', 'accessoryTable']);
 
 class Database
 {
+    private static $database;
     protected $productTable;
     protected $categoryTable;
     protected $accessoryTable;
+
+    public static function createDatabase()
+    {
+        if (self::$database !== null) {
+            return self::$database;
+        }
+        self::$database = new self();
+        return self::$database;
+    }
 
     public function getProductTable()
     {
@@ -22,14 +34,20 @@ class Database
         return $this->accessoryTable;
     }
 
-    public function insertTable($tableName, $row)
+    public function insertTable($tableName, BaseRow $row)
     {
+        if (!in_array($tableName, TABLE_NAMES)) {
+            return false;
+        }
         return $this->$tableName[] = $row;
     }
 
     public function selectTable($tableName, $elementName)
     {
-        $table = array();
+        if (!in_array($tableName, TABLE_NAMES)) {
+            return false;
+        }
+        $table = [];
         foreach ($this->$tableName as $item) {
             if ($item->getName() == $elementName) {
                 $table[] = $item;
@@ -40,6 +58,9 @@ class Database
 
     public function findById($tableName, $id)
     {
+        if (!in_array($tableName, TABLE_NAMES)) {
+            return false;
+        }
         foreach ($this->$tableName as $item) {
             if ($item->getId() == $id) {
                 return $item;
@@ -50,6 +71,9 @@ class Database
 
     public function findByName($tableName, $name)
     {
+        if (!in_array($tableName, TABLE_NAMES)) {
+            return false;
+        }
         foreach ($this->$tableName as $item) {
             if ($item->getName() == $name) {
                 return $item;
@@ -58,8 +82,11 @@ class Database
         return false;
     }
 
-    public function updateTable($tableName, $row)
+    public function updateTable($tableName, BaseRow $row)
     {
+        if (!in_array($tableName, TABLE_NAMES)) {
+            return false;
+        }
         foreach ($this->$tableName as $key => $item) {
             if ($item->getId() == $row->getId()) {
                 return ($this->$tableName[$key] = $row);
@@ -70,6 +97,9 @@ class Database
 
     public function deleteTable($tableName, $id)
     {
+        if (!in_array($tableName, TABLE_NAMES)) {
+            return false;
+        }
         foreach ($this->$tableName as $key => $item) {
             if ($item->getId() == $id) {
                 unset($this->$tableName[$key]);
@@ -81,13 +111,19 @@ class Database
 
     public function truncateTable($tableName)
     {
+        if (!in_array($tableName, TABLE_NAMES)) {
+            return false;
+        }
         unset($this->$tableName);
         return true;
     }
 
     public function getAllTable($table)
     {
-        $result = array();
+        if (!in_array($tableName, TABLE_NAMES)) {
+            return false;
+        }
+        $result = [];
         foreach ($this->$table as $value) {
             $result[] = $value;
         }
@@ -96,6 +132,9 @@ class Database
 
     public function updateTableById($id, $row, $tableName)
     {
+        if (!in_array($tableName, TABLE_NAMES)) {
+            return false;
+        }
         foreach ($this->$tableName as $key => $item) {
             if ($item->getId() == $id) {
                 return ($this->$tableName[$key] = $row);

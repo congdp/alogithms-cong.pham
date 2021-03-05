@@ -1,5 +1,5 @@
 <?php
-require '../congdp.entyti/product.php';
+require_once '../congdp.entyti/product.php';
 
 class ProductDemo
 {
@@ -7,7 +7,6 @@ class ProductDemo
     public function createProductTest($id, $name, $categoryId)
     {
         $this->productDemo = new Product($id, $name, $categoryId);
-        // return $this->productDemo;
     }
     public function printProduct()
     {

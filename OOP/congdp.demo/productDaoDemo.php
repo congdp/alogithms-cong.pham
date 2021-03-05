@@ -2,7 +2,6 @@
 require '../congdp.dao/productDao.php';
 class ProductDaoDemo extends ProductDAO
 {
-
     protected $productDaoDemo;
 
     public function insertTest($row)
@@ -35,10 +34,12 @@ class ProductDaoDemo extends ProductDAO
     }
 }
 
-$productDaoDemo = new ProductDaoDemo(new Database);
+// $productDaoDemo = new ProductDaoDemo(new Database);
+$productDaoDemo = new ProductDaoDemo(Database::createDatabase());
+
 $row = new Product(1, 'cong', 1);
 
 echo "<pre>";
 print_r($productDaoDemo->insertTest($row));
-print_r($productDaoDemo->findAllTest($row));
-print_r($productDaoDemo->findByIdTest(1));
+// print_r($productDaoDemo->findAllTest($row));
+// print_r($productDaoDemo->findByIdTest(1));
